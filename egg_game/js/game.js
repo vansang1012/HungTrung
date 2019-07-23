@@ -1,4 +1,4 @@
-var game = function(){
+let game = function(){
 	this.canvas         = null;
 	this.context        = null;
 	this.resource       = null;
@@ -6,10 +6,10 @@ var game = function(){
 	this.eggs           = [];
 	this.bar            = null;
 	this.bowl           = null;
-	this.resourceLoaded = false; // cái này kiểm tra tất cả ảnh đã tải xong chưa
+	this.resourceLoaded = false;
 	this.score          = 0;
 
-	var self = this;
+	let self = this;
 
 	this.init = function(){
 		this.canvas        = document.createElement('canvas');
@@ -18,8 +18,6 @@ var game = function(){
 		this.context       = this.canvas.getContext('2d');
 
 		document.body.appendChild(this.canvas);
-
-		// tạo tất cả các object
 		this.resource = new resource(this);
 		this.bar      = new bar(this);
 		this.resource.load();
@@ -44,7 +42,7 @@ var game = function(){
 	this.loop = function(){
 		self.update();
 		self.draw();
-		setTimeout(self.loop, 20); // 50 hình trên giây
+		setTimeout(self.loop, 20);
 	}
 
 	this.update = function(){
@@ -58,24 +56,21 @@ var game = function(){
 	}
 
 	this.draw = function(){
-		// vẽ cái hình nền trời xanh
-		self.context.fillStyle = "#3e738e"; // cái màu lấy từ photoshop đấy
+		self.context.fillStyle = "#3e738e";
 		self.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
 		if (self.resourceLoaded == false){
 			self.drawLoading();
 		}
 		else {
-			self.drawTheWorld(); // vẽ thế giới =))
+			self.drawTheWorld();
 		}
 	}
-
-	// tạo quả trứng mới
 	this.createNewEgg = function(){
 		if (self.resourceLoaded){
-			var newEgg = new egg(self);
+			let newEgg = new egg(self);
 			newEgg.init();
-			self.eggs.push(newEgg); // cho vào mảng các quả trứng, đây này
+			self.eggs.push(newEgg);
 		}
 	}
 
@@ -88,27 +83,22 @@ var game = function(){
 	}
 
 	this.drawAllEggs = function(){
-		// lặp qua từng quả trứng rồi vẽ nó
-		for (var i = 0; i < this.eggs.length; i++){
+		for (let i = 0; i < this.eggs.length; i++){
 			this.eggs[i].draw();
 		}
 	}
-
-	// vẽ tất cả các con gà lên
 	this.drawAllChickens = function(){
-		for (var i = 0; i < this.chickens.length; i++){
+		for (let i = 0; i < this.chickens.length; i++){
 			this.chickens[i].draw();
 		}
 	}
 
-	// vẽ cái chữ loading
 	this.drawLoading = function(){
 		self.context.fillStyle = '#ffffff';
 		self.context.font = '30px Arial';
 		self.context.fillText('Loading...', 100, 100);
 	}
 
-	// vẽ điểm
 	this.drawScore = function(){
 		self.context.fillStyle = '#ffffff';
 		self.context.font = '30px Arial';

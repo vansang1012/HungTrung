@@ -1,31 +1,30 @@
-var gameImage = function(name){
-	this.img = null; // đây là ảnh thật luôn nhá, cái name ở trên là tên file thôi
+let gameImage = function(name){
+	this.img = null;
 	this.name = name;
-	this.loaded = false; // trạng thái load ảnh xong hay chưa, tạm thời là false;
-	var self = this;
+	this.loaded = false;
+	let self = this;
 
 	this.load = function(){
 		this.img = new Image();
 		this.img.onload = function(){
-			self.loaded = true; // load xong ảnh thì đặt lại là true
+			self.loaded = true;
 		}
-		this.img.src = 'images/' + name + '.png'; // tất cả ảnh là png hết nhé
+		this.img.src = 'images/' + name + '.png';
 	}
 }
 
 var resource = function(game) {
 	this.game       = game;
-	this.bar        = new gameImage('bar'); // là cái thanh cho gà đậu
-	this.bowl       = new gameImage('bowl'); // là cái bát hứng trứng
+	this.bar        = new gameImage('bar');
+	this.bowl       = new gameImage('bowl');
 	this.chicken    = new gameImage('chicken');
-	this.egg1       = new gameImage('egg1'); // có 2 loại trứng
-	this.egg2       = new gameImage('egg2'); // có 2 loại trứng
+	this.egg1       = new gameImage('egg1');
+	this.egg2       = new gameImage('egg2');
 	this.egg_popped = new gameImage('egg-popped');
 	this.shit       = new gameImage('shit');
 
-	var self = this;
+	let self = this;
 
-	// giờ thì load tất cả hình ảnh nào
 	this.load = function(){
 		this.bar.load();
 		this.bowl.load();
@@ -36,12 +35,11 @@ var resource = function(game) {
 		this.shit.load();
 
 		setInterval(function(){
-			self.checkAllImageLoaded(); // chứ nửa giây, kiểm tra xem tất cả ảnh đã load xong chưa
+			self.checkAllImageLoaded();
 		}, 500)
 	}
 
 	this.checkAllImageLoaded = function(){
-		// nếu tất cả ảnh đã load xong
 		if (
 			(this.bar.loaded) &&
 			(this.bowl.loaded) &&

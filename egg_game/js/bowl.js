@@ -1,8 +1,8 @@
-var bowl = function(game) {
+let bowl = function(game) {
 	this.game = game;
 	this.x = 0;
 	this.y = 350;
-	var self = this;
+	let self = this;
 
 	this.init = function(){
 		this.game.canvas.addEventListener('mousemove', function(event){
@@ -11,7 +11,7 @@ var bowl = function(game) {
 	}
 
 	this.proccessMouseMove = function(event){
-		var rect = self.game.canvas.getBoundingClientRect();
+		let rect = self.game.canvas.getBoundingClientRect();
 		this.x = event.clientX - rect.left - (this.game.resource.bowl.img.width / 2);
 	}
 
